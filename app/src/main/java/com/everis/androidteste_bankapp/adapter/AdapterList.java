@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.everis.androidteste_bankapp.R;
 import com.everis.androidteste_bankapp.model.statementlist.StatementList;
-import com.everis.androidteste_bankapp.model.statementlist.StatementReceive;
+import com.everis.androidteste_bankapp.util.Format;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class AdapterList extends RecyclerView.Adapter<ListViewHolder> {
 
     private Context context;
     private List<StatementList> statementLists;
+    private Format format;
 
     public AdapterList(Context context, List<StatementList> statementLists){
         this.context = context;
@@ -36,7 +37,8 @@ public class AdapterList extends RecyclerView.Adapter<ListViewHolder> {
         holder.tv_title.setText(statementList.getTitle());
         holder.tv_desc.setText(statementList.getDesc());
         holder.tv_date.setText(statementList.getDate());
-        holder.tv_value.setText(statementList.getValue());
+        String value = format.SetCurrencyInstanceInt(statementList.getValue());
+        holder.tv_value.setText(value);
     }
 
     @Override

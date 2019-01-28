@@ -19,7 +19,7 @@ public class StatementList {
 
     @SerializedName("value")
     @Expose
-    private String value;
+    private Double value;
 
 
 
@@ -47,11 +47,11 @@ public class StatementList {
         this.date = date;
     }
 
-    public String getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 }

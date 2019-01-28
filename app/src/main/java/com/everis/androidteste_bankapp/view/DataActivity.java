@@ -17,6 +17,7 @@ import com.everis.androidteste_bankapp.model.retrofit.ApiUtil;
 import com.everis.androidteste_bankapp.model.statementlist.StatementList;
 import com.everis.androidteste_bankapp.model.statementlist.StatementReceive;
 import com.everis.androidteste_bankapp.model.user.UserReceive;
+import com.everis.androidteste_bankapp.util.Format;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class DataActivity extends AppCompatActivity {
     private TextView tv_name;
     private TextView tv_account;
     private TextView tv_balance;
+    private Format format;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +45,6 @@ public class DataActivity extends AppCompatActivity {
         iniciarVariaveis();
         iniciarAcao();
     }
-
 
     private void iniciarVariaveis() {
         btn_logout = findViewById(R.id.btn_logout);
@@ -73,6 +74,7 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
+
         ApiUtil.getServiceClass().getUserAccount("test_user", "Test@1").enqueue(new Callback<UserReceive>() {
             @Override
             public void onResponse(Call<UserReceive> call, Response<UserReceive> response) {
@@ -80,7 +82,9 @@ public class DataActivity extends AppCompatActivity {
 
                 tv_name.setText(userReceive.getUserAccount().getName());
                 tv_account.setText(userReceive.getUserAccount().getBankAccount() + " / " + userReceive.getUserAccount().getAgency());
-                tv_balance.setText(userReceive.getUserAccount().getBalance().toString());
+                String balance = userReceive.getUserAccount().getBalance().toString().replace(".", "");
+                balance = format.SetCurrencyInstanceInt(Double.parseDouble(balance));
+                tv_balance.setText(balance);
             }
 
             @Override

@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.everis.androidteste_bankapp.R;
 
+import java.text.DecimalFormatSymbols;
+
 class ListViewHolder extends RecyclerView.ViewHolder {
 
     public TextView tv_title;
@@ -16,6 +18,7 @@ class ListViewHolder extends RecyclerView.ViewHolder {
 
     public ListViewHolder(@NonNull View itemView) {
         super(itemView);
+
         tv_title = itemView.findViewById(R.id.tv_title);
         tv_date = itemView.findViewById(R.id.tv_date);
         tv_desc = itemView.findViewById(R.id.tv_desc);
