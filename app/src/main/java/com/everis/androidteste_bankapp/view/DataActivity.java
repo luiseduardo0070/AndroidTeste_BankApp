@@ -89,7 +89,6 @@ public class DataActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserReceive> call, Throwable t) {
-
             }
         });
 
