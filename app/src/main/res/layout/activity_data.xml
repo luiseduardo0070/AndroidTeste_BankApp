@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_account" />
 
             <TextView
-                android:id="@+id/tv_saldo"
+                android:id="@+id/tv_balance"
                 android:layout_width="184dp"
                 android:layout_height="29dp"
                 android:layout_marginStart="8dp"

@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.everis.androidteste_bankapp.R;
 import com.everis.androidteste_bankapp.adapter.AdapterList;
 import com.everis.androidteste_bankapp.model.retrofit.ApiUtil;
 import com.everis.androidteste_bankapp.model.statementlist.StatementList;
 import com.everis.androidteste_bankapp.model.statementlist.StatementReceive;
+import com.everis.androidteste_bankapp.model.user.UserReceive;
 
 import java.util.List;
 
@@ -29,6 +31,9 @@ public class DataActivity extends AppCompatActivity {
     private RecyclerView rv_list;
 
     private Button btn_logout;
+    private TextView tv_name;
+    private TextView tv_account;
+    private TextView tv_balance;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +47,9 @@ public class DataActivity extends AppCompatActivity {
 
     private void iniciarVariaveis() {
         btn_logout = findViewById(R.id.btn_logout);
+        tv_name = findViewById(R.id.tv_name);
+        tv_account = findViewById(R.id.tv_account);
+        tv_balance = findViewById(R.id.tv_balance);
 
         rv_list = findViewById(R.id.rv_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -59,9 +67,24 @@ public class DataActivity extends AppCompatActivity {
                     rv_list.setAdapter(adapter);
                 }
             }
-
             @Override
             public void onFailure(Call<StatementReceive> call, Throwable t) {
+
+            }
+        });
+
+        ApiUtil.getServiceClass().getUserAccount("test_user", "Test@1").enqueue(new Callback<UserReceive>() {
+            @Override
+            public void onResponse(Call<UserReceive> call, Response<UserReceive> response) {
+                UserReceive userReceive = response.body();
+
+                tv_name.setText(userReceive.getUserAccount().getName());
+                tv_account.setText(userReceive.getUserAccount().getBankAccount() + " / " + userReceive.getUserAccount().getAgency());
+                tv_balance.setText(userReceive.getUserAccount().getBalance().toString());
+            }
+
+            @Override
+            public void onFailure(Call<UserReceive> call, Throwable t) {
 
             }
         });
@@ -77,7 +100,5 @@ public class DataActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 }
