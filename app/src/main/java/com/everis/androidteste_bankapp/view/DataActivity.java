@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.everis.androidteste_bankapp.R;
 import com.everis.androidteste_bankapp.adapter.AdapterList;
@@ -70,7 +71,7 @@ public class DataActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<StatementReceive> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Something goes wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
